@@ -18,10 +18,13 @@ public class ChunkCreator : MonoBehaviour
             for (int j = 0; j < size; j++)
             {
                 float perlinValue = PerlinCreator.perlin[i, j];
-                GameObject prefab = Instantiate(block, new Vector3(i, j, 0), Quaternion.identity);
                 Color colorValue = perlinValue > 0.5f ? Color.white : Color.black;
-                Debug.Log(perlinValue);
-                prefab.GetComponent<SpriteRenderer>().color = colorValue;
+                if (perlinValue < 0.5f)
+                {
+                    GameObject prefab = Instantiate(block, new Vector3(i, j, 0), Quaternion.identity);
+                    prefab.GetComponent<SpriteRenderer>().color = colorValue;
+                }
+
             }
         }
     }
