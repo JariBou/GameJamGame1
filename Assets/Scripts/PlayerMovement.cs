@@ -1,12 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed = 5f;
+    public float speed = 500f;
 
     private Rigidbody2D rb;
+    private Vector2 moveVector;
     
     // Start is called before the first frame update
     void Start()
@@ -19,7 +21,13 @@ public class PlayerMovement : MonoBehaviour
     {
         float x = Input.GetAxis("Horizontal");
         float y = Input.GetAxis("Vertical");
+        moveVector = new Vector2(x, y).normalized;
+        rb.velocity = moveVector * speed;
+    }
 
-        rb.velocity = new Vector2(x, y).normalized * speed;
+    private void FixedUpdate()
+    {
+        //rb.velocity = moveVector * (speed * Time.fixedDeltaTime);
+
     }
 }

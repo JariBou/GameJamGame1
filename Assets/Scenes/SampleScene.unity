@@ -266,7 +266,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   block: {fileID: 817804950398853426, guid: 13cf4b7e69bb0b14c8bcb2f79514ee0c, type: 3}
-  size: 8
+  size: 12
 --- !u!4 &559810653
 Transform:
   m_ObjectHideFlags: 0
