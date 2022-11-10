@@ -18,12 +18,18 @@ public class ChunkCreator : MonoBehaviour
             for (int j = 0; j < size; j++)
             {
                 float perlinValue = PerlinCreator.perlin[i, j];
-                Color colorValue = perlinValue > 0.2f ? Color.white : Color.black;
+                bool isWall = perlinValue < 0.2f;
+                Color colorValue = isWall ? Color.black : Color.white;
                 GameObject prefab = Instantiate(block, new Vector3(i*4, j*4, 0), Quaternion.identity);
-                prefab.GetComponent<SpriteRenderer>().color = colorValue;
-                if (perlinValue < 0.1f)
+                if (isWall)
                 {
+                    BoxCollider2D box = prefab.AddComponent<BoxCollider2D>() as BoxCollider2D;
+                    box.isTrigger = true;
+                    BoxCollider2D box2 = prefab.AddComponent<BoxCollider2D>() as BoxCollider2D;
+                    prefab.tag = "Void";
+                    prefab.layer = 8;
                 }
+                prefab.GetComponent<SpriteRenderer>().color = colorValue;
 
             }
         }

@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody2D rb;
     private Vector2 moveVector;
+    private CircleCollider2D collider;
     
     // Start is called before the first frame update
     void Start()
@@ -23,6 +24,14 @@ public class PlayerMovement : MonoBehaviour
         float y = Input.GetAxis("Vertical");
         moveVector = new Vector2(x, y).normalized;
         rb.velocity = moveVector * speed;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Void"))
+        {
+            transform.position = Vector3.zero;
+        }
     }
 
     private void FixedUpdate()
